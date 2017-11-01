@@ -2,6 +2,7 @@ package eu.sanprojects.yanagaorders.domain;
 
 import com.google.common.collect.ForwardingList;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -34,10 +35,10 @@ public class OrderItems extends ForwardingList<OrderItem> implements Serializabl
                 .reduce(0,Integer::sum);
     }
     
-    public Integer getTotalValue(){
+    public BigDecimal getTotalValue(){
         return delegate
                 .stream()
-                .map(OrderItem::getQuantity)
-                .reduce(0,Integer::sum);
+                .map(OrderItem::getValue)
+                .reduce(BigDecimal.ZERO,BigDecimal::add);
     }    
 }

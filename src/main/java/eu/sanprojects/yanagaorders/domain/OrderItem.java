@@ -82,5 +82,11 @@ public class OrderItem implements Formattable{
     public BigDecimal getValue() {
         return value;
     }
+    
+    //imposed by hibernate - but should not be used
+    @Deprecated
+    public OrderItem(){
+        
+    }
 
 }
