@@ -42,19 +42,19 @@ public class OrderItem implements Formattable{
     public boolean equals(Object obj) {
         if (obj instanceof OrderItem){
             OrderItem other = (OrderItem) obj;
-            return Objects.equals(this.product, other.product);
+            return  Objects.equals(this.product, other.product) &&
+                    Objects.equals(this.quantity, other.quantity) &&
+                    Objects.equals(this.value, other.value);
         }
         return false;
     }
 
     
-    //TODO: correct
     @Override
     public int hashCode() {
-        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
+        return Objects.hash(this.value,this.product,this.quantity);
     }
 
-    //TODO: correct
     @Override
     public String toString() {
         return MoreObjects
@@ -83,10 +83,8 @@ public class OrderItem implements Formattable{
         return value;
     }
     
-    //imposed by hibernate - but should not be used
+    //imposed by hibernate - but should not be used, use factory method instead
     @Deprecated
-    public OrderItem(){
-        
-    }
+    public OrderItem(){}
 
 }
