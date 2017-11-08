@@ -9,6 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author sanjeya
  */
 public interface OrderRepository extends JpaRepository<Order, Long>{
-    
     Order findByNumber(OrderNumber number);
 }

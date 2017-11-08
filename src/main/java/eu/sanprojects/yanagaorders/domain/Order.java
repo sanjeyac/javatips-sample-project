@@ -15,7 +15,12 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 /**
- *
+ * An order contains several items.
+ * 
+ * In this case we have two List of Items:
+ * - List of esires
+ * - Effective Orders
+ * 
  * @author sanjeya
  */
 @Entity(name = "orders_table")
@@ -36,12 +41,11 @@ public class Order implements Serializable{
     @LazyCollection(LazyCollectionOption.FALSE)
     List<OrderItem> listOfDesires = Lists.newLinkedList();
     
-    /** private construct so this constructor can't be used outside */
     private Order(OrderNumber number) {
         this.number = number;
     }
     
-    /** Use a factory method because 
+    /** Use a static factory method because 
      * so it could be polymorphic and java has covariance **/
     public static Order of(OrderNumber number) {
         
@@ -50,44 +54,40 @@ public class Order implements Serializable{
         return new Order(number);
     }    
     
+    /* Apply an operation to items without knowing of how items are implemented*/
     public void apply(OrderItemOperation operation){
         items = items.stream().map(operation).collect(Collectors.toList());
     }
     
-    /** Business logic of adding item here! */ 
+    /** Abstracting Items implementation */ 
     public void addItem(OrderItem item){
         if ( item!=null && !items.contains(item) ){
             items.add(item);
         }
-        //TODO
-        //can avoid duplicates here!!!
     }
     
-    
-    /** Business logic of adding item here! */ 
+    /** Abstracting Items implementation */ 
     public void addToListOfDesires(OrderItem item){
         if ( item!=null && !listOfDesires.contains(item) ){
             listOfDesires.add(item);
         }
-        //TODO
-        //can avoid duplicates here!!!
     }    
     
-    /** Use immutability to avoid editing on values */
-    public List getItemList(){
+    /** Use immutability to avoid editing on values during multi-threading */
+    public List getItemAsList(){
         return ImmutableList.copyOf(items);
     }
 
-    /** Using a List Wrapping class I can share operations on collections of the same type*/
+    /** Using a List Wrapping class so I can share operations on collections of the same type*/
     public OrderItems getItems() {
         return OrderItems.of(items);
     }
     
     public OrderItems getListOfDesires() {
-        return OrderItems.of(items);
+        return OrderItems.of(listOfDesires);
     }
     
-    // imposed by hibernate -should not be used
+    /** imposed by hibernate - should not be used **/
     @Deprecated
     public Order() {        
     }

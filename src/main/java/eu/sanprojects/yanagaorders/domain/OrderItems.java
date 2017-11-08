@@ -6,7 +6,11 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- *
+ * A decorator pattern for List,
+ * Adds functionalities to List of OrderItem, 
+ * in this way several list of this type
+ * can share methods in a same place ( this class )
+ * 
  * @author sanjeya
  */
 public class OrderItems extends ForwardingList<OrderItem> implements Serializable{

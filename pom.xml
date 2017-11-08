@@ -47,6 +47,13 @@
             <version>1.16.18</version>
         </dependency>        
         
+        <!--postgresql db-->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4-1206-jdbc42</version>
+        </dependency>
+        
     </dependencies>
 
     <build>

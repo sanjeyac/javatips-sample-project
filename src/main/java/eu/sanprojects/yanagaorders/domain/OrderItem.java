@@ -12,9 +12,6 @@ import javax.persistence.Embeddable;
  *
  * @author sanjeya
  */
-/**
- * This is a value object
- */
 @Embeddable
 public class OrderItem implements Formattable{
 
@@ -38,18 +35,22 @@ public class OrderItem implements Formattable{
         return new OrderItem(product, quantity, value);
     }
 
+    /* two items are equals if they have the same name */
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof OrderItem){
-            OrderItem other = (OrderItem) obj;
-            return  Objects.equals(this.product, other.product) &&
-                    Objects.equals(this.quantity, other.quantity) &&
-                    Objects.equals(this.value, other.value);
+        
+        if (obj == null) {
+            return false;
         }
+        
+        if (obj instanceof OrderItem) {
+            final OrderItem other = (OrderItem) obj;
+            return Objects.equals(this.product, other.product);
+        }
+        
         return false;
     }
 
-    
     @Override
     public int hashCode() {
         return Objects.hash(this.value,this.product,this.quantity);

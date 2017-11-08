@@ -8,7 +8,11 @@ import java.util.Formatter;
 import java.util.Objects;
 
 /**
- *
+ * This class is a Value Object,
+ * that  abstracts from the type of the Order Number,
+ * so it can change in other formats in the future 
+ * without big changes in the codebase
+ * 
  * @author sanjeya
  */
 public class OrderNumber implements Serializable, Formattable{
@@ -54,7 +58,6 @@ public class OrderNumber implements Serializable, Formattable{
                 .add("value", value)
                 .toString();
     }
-
     
     /** This will show data to the user with the I18N support*/
     @Override
