@@ -73,12 +73,16 @@ public class Order implements Serializable{
         }
     }    
     
-    /** Use immutability to avoid editing on values during multi-threading */
+    /** Use immutability to avoid concurrency problems */
     public List getItemAsList(){
         return ImmutableList.copyOf(items);
     }
 
-    /** Using a List Wrapping class so I can share operations on collections of the same type*/
+    /** Using a List Wrapping class so I can share operations 
+     * on collections of the same type 
+     * and you don't want to expose the list implementation */
+    
+    /** PLEASE NOTE: this is an alternative to getItemAsList */
     public OrderItems getItems() {
         return OrderItems.of(items);
     }
