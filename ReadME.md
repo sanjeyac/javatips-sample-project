@@ -1,6 +1,7 @@
 This is a sample project made from a live session in JavaDay 2016
 
-It's a coding style based on Domain-Driven Design
+The purpose of this project is too put together several tips and tricks
+a simple coding style to make the code easy to read and to extend.
 
 Context:
 This a order management scenario.
